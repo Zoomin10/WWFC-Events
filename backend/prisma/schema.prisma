@@ -1,13 +1,137 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+enum ScoringType {
+  HIGHEST_WINS
+  LOWEST_WINS
+}
+
+enum ResultStatus {
+  ACTIVE
+  VOID
+}
+
+model Event {
+  id         String   @id @default(cuid())
+  name       String
+  eventDate  DateTime
+  location   String?
+  isActive   Boolean  @default(true)
+  isArchived Boolean  @default(false)
+
+  ageGroups     AgeGroup[]
+  challenges    Challenge[]
+  participants  Participant[]
+  results       Result[]
+  sponsors      Sponsor[]
+  announcements Announcement[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AgeGroup {
+  id          String  @id @default(cuid())
+  eventId     String
+  name        String
+  description String?
+  sortOrder   Int     @default(0)
+
+  event        Event         @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  participants Participant[]
+  results      Result[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Challenge {
+  id          String      @id @default(cuid())
+  eventId     String
+  name        String
+  description String?
+  scoringType ScoringType
+  unit        String?
+  isActive    Boolean     @default(true)
+  sortOrder   Int         @default(0)
+
+  event   Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  results Result[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Participant {
+  id          String  @id @default(cuid())
+  eventId     String
+  ageGroupId  String
+  firstName   String
+  lastName    String?
+  displayName String
+  schoolYear  String?
+  entryNumber Int?
+
+  event    Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  ageGroup AgeGroup @relation(fields: [ageGroupId], references: [id])
+  results  Result[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Result {
+  id            String @id @default(cuid())
+  eventId       String
+  participantId String
+  ageGroupId    String
+  challengeId   String
+
+  rawValue   Float
+  bonusValue Float        @default(0)
+  finalValue Float
+  notes      String?
+  status     ResultStatus @default(ACTIVE)
+
+  event       Event       @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  participant Participant @relation(fields: [participantId], references: [id], onDelete: Cascade)
+  ageGroup    AgeGroup    @relation(fields: [ageGroupId], references: [id])
+  challenge   Challenge   @relation(fields: [challengeId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Sponsor {
+  id        String  @id @default(cuid())
+  eventId   String
+  name      String
+  logoUrl   String?
+  website   String?
+  isActive  Boolean @default(true)
+  sortOrder Int     @default(0)
+
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Announcement {
+  id        String  @id @default(cuid())
+  eventId   String
+  title     String
+  message   String
+  isActive  Boolean @default(true)
+  sortOrder Int     @default(0)
+
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
