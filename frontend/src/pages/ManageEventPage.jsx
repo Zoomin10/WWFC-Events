@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getEvent } from "../api/events";
-import { getParticipants, createParticipant } from "../api/participants";
-import { schoolYearLabels } from "../utils/schoolYears";
+import ParticipantsTab from "../components/ParticipantsTab";
 
 export default function ManageEventPage() {
   const { id } = useParams();
@@ -10,42 +9,13 @@ export default function ManageEventPage() {
   const [event, setEvent] = useState(null);
   const [activeTab, setActiveTab] = useState("overview");
 
-  const [participants, setParticipants] = useState([]);
-  const [firstName, setFirstName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [schoolYear, setSchoolYear] = useState("YEAR4");
-
   useEffect(() => {
     loadEvent();
   }, [id]);
 
   async function loadEvent() {
     const eventData = await getEvent(id);
-    const participantData = await getParticipants(id);
-
     setEvent(eventData);
-    setParticipants(participantData);
-  }
-
-  async function handleCreateParticipant(e) {
-    e.preventDefault();
-
-    if (!firstName || !surname) {
-      alert("Please enter first name and surname.");
-      return;
-    }
-
-    await createParticipant(id, {
-      firstName,
-      surname,
-      schoolYear,
-    });
-
-    setFirstName("");
-    setSurname("");
-    setSchoolYear("YEAR4");
-
-    await loadEvent();
   }
 
   if (!event) {
@@ -78,7 +48,7 @@ export default function ManageEventPage() {
         <div className="col-md-4">
           <div className="card text-center shadow-sm">
             <div className="card-body">
-              <h3>{participants.length}</h3>
+              <h3>{event.participants.length}</h3>
               <p className="text-muted mb-0">Participants</p>
             </div>
           </div>
@@ -168,89 +138,7 @@ export default function ManageEventPage() {
           )}
 
           {activeTab === "participants" && (
-            <div>
-              <h5>Participants</h5>
-
-              <form className="row g-2 mb-4" onSubmit={handleCreateParticipant}>
-                <div className="col-md-3">
-                  <input
-                    className="form-control"
-                    placeholder="First name"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                  />
-                </div>
-
-                <div className="col-md-3">
-                  <input
-                    className="form-control"
-                    placeholder="Surname"
-                    value={surname}
-                    onChange={(e) => setSurname(e.target.value)}
-                  />
-                </div>
-
-                <div className="col-md-3">
-                  <select
-                    className="form-select"
-                    value={schoolYear}
-                    onChange={(e) => setSchoolYear(e.target.value)}
-                  >
-                    <option value="RECEPTION">Reception</option>
-                    <option value="YEAR1">Year 1</option>
-                    <option value="YEAR2">Year 2</option>
-                    <option value="YEAR3">Year 3</option>
-                    <option value="YEAR4">Year 4</option>
-                    <option value="YEAR5">Year 5</option>
-                    <option value="YEAR6">Year 6</option>
-                    <option value="YEAR7">Year 7</option>
-                    <option value="YEAR8">Year 8</option>
-                    <option value="YEAR9">Year 9</option>
-                    <option value="YEAR10">Year 10</option>
-                    <option value="YEAR11">Year 11</option>
-                    <option value="YEAR12">Year 12</option>
-                    <option value="YEAR13">Year 13</option>
-                    <option value="ADULT">Adult</option>
-                  </select>
-                </div>
-
-                <div className="col-md-3">
-                  <button className="btn btn-primary w-100" type="submit">
-                    Add Participant
-                  </button>
-                </div>
-              </form>
-
-              {participants.length === 0 ? (
-                <div className="alert alert-secondary">
-                  No participants registered yet.
-                </div>
-              ) : (
-                <table className="table table-sm align-middle">
-                  <thead>
-                    <tr>
-                      <th>Entry</th>
-                      <th>Name</th>
-                      <th>School Year</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    {participants.map((participant) => (
-                      <tr key={participant.id}>
-                        <td>
-                          {String(participant.entryNumber).padStart(3, "0")}
-                        </td>
-                        <td>
-                          {participant.firstName} {participant.surname}
-                        </td>
-                        <td>{schoolYearLabels[participant.schoolYear]}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              )}
-            </div>
+            <ParticipantsTab eventId={id} onParticipantsChanged={loadEvent} />
           )}
 
           {activeTab === "challenges" && (
