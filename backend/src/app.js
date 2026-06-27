@@ -3,6 +3,8 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 
+import eventRoutes from "./routes/eventRoutes.js";
+
 const app = express();
 
 app.use(helmet());
@@ -16,5 +18,7 @@ app.get("/api/health", (req, res) => {
     app: "WWFC Events API",
   });
 });
+
+app.use("/api/events", eventRoutes);
 
 export default app;
