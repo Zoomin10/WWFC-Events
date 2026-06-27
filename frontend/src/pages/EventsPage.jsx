@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { Link } from "react-router-dom";
 import { getEvents, createEvent, activateEvent } from "../api/events";
 
 export default function EventsPage() {
@@ -149,12 +149,12 @@ export default function EventsPage() {
                 </button>
               )}
 
-              <button
-                className="btn btn-primary btn-sm"
-                onClick={() => console.log("Manage event:", event.id)}
-              >
-                Manage
-              </button>
+              <Link
+  className="btn btn-primary btn-sm"
+  to={`/events/${event.id}`}
+>
+  Manage
+</Link>
 
               <button className="btn btn-outline-secondary btn-sm" disabled>
                 Archive

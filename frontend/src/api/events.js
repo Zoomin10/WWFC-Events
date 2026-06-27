@@ -36,3 +36,12 @@ export async function activateEvent(id) {
 
   return response.json();
 }
+export async function getEvent(id) {
+  const response = await fetch(`${API_URL}/events/${id}`);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch event");
+  }
+
+  return response.json();
+}
