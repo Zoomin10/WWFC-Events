@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getEvent } from "../api/events";
 import ParticipantsTab from "../components/ParticipantsTab";
+import ChallengesTab from "../components/ChallengesTab";
+import ResultsTab from "../components/ResultsTab";
+import LeaderboardTab from "../components/LeaderboardTab";
 
 export default function ManageEventPage() {
   const { id } = useParams();
@@ -141,30 +144,11 @@ export default function ManageEventPage() {
             <ParticipantsTab eventId={id} onParticipantsChanged={loadEvent} />
           )}
 
-          {activeTab === "challenges" && (
-            <div>
-              <h5>Challenges</h5>
-              <p className="text-muted mb-0">
-                Challenge setup will appear here.
-              </p>
-            </div>
-          )}
+          {activeTab === "challenges" && <ChallengesTab eventId={id} />}
 
-          {activeTab === "results" && (
-            <div>
-              <h5>Results</h5>
-              <p className="text-muted mb-0">Score entry will appear here.</p>
-            </div>
-          )}
+          {activeTab === "results" && <ResultsTab eventId={id} />}
 
-          {activeTab === "leaderboard" && (
-            <div>
-              <h5>Leaderboard</h5>
-              <p className="text-muted mb-0">
-                Live leaderboard will appear here.
-              </p>
-            </div>
-          )}
+          {activeTab === "leaderboard" && <LeaderboardTab eventId={id} />}
         </div>
       </div>
     </div>
