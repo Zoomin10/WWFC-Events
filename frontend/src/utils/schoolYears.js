@@ -1,0 +1,17 @@
+export const schoolYearLabels = {
+  RECEPTION: "Reception",
+  YEAR1: "Year 1",
+  YEAR2: "Year 2",
+  YEAR3: "Year 3",
+  YEAR4: "Year 4",
+  YEAR5: "Year 5",
+  YEAR6: "Year 6",
+  YEAR7: "Year 7",
+  YEAR8: "Year 8",
+  YEAR9: "Year 9",
+  YEAR10: "Year 10",
+  YEAR11: "Year 11",
+  YEAR12: "Year 12",
+  YEAR13: "Year 13",
+  ADULT: "Adult",
+};
