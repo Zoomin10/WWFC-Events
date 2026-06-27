@@ -6,132 +6,86 @@ datasource db {
   provider = "postgresql"
 }
 
-enum ScoringType {
-  HIGHEST_WINS
-  LOWEST_WINS
-}
-
-enum ResultStatus {
-  ACTIVE
-  VOID
-}
-
 model Event {
-  id         String   @id @default(cuid())
-  name       String
-  eventDate  DateTime
-  location   String?
-  isActive   Boolean  @default(true)
-  isArchived Boolean  @default(false)
-
-  ageGroups     AgeGroup[]
-  challenges    Challenge[]
-  participants  Participant[]
-  results       Result[]
-  sponsors      Sponsor[]
-  announcements Announcement[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model AgeGroup {
-  id          String  @id @default(cuid())
-  eventId     String
-  name        String
-  description String?
-  sortOrder   Int     @default(0)
-
-  event        Event         @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  id           String        @id @default(cuid())
+  name         String
+  location     String?
+  eventDate    DateTime
+  isActive     Boolean       @default(false)
+  isArchived   Boolean       @default(false)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  ageGroups    AgeGroup[]
+  challenges   Challenge[]
   participants Participant[]
-  results      Result[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 model Challenge {
-  id          String      @id @default(cuid())
-  eventId     String
-  name        String
-  description String?
-  scoringType ScoringType
-  unit        String?
-  isActive    Boolean     @default(true)
-  sortOrder   Int         @default(0)
+  id            String        @id @default(cuid())
+  eventId       String
+  name          String
+  scoringMethod ScoringMethod
+  unit          String
+  sortOrder     Int           @default(1)
+  isActive      Boolean       @default(true)
+  event         Event         @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  results       Result[]
+}
 
-  event   Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  results Result[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model AgeGroup {
+  id            String     @id @default(cuid())
+  eventId       String
+  name          String
+  minSchoolYear SchoolYear
+  maxSchoolYear SchoolYear
+  sortOrder     Int        @default(1)
+  event         Event      @relation(fields: [eventId], references: [id], onDelete: Cascade)
 }
 
 model Participant {
-  id          String  @id @default(cuid())
+  id          String     @id @default(cuid())
   eventId     String
-  ageGroupId  String
+  entryNumber Int
   firstName   String
-  lastName    String?
-  displayName String
-  schoolYear  String?
-  entryNumber Int?
+  surname     String
+  schoolYear  SchoolYear
+  event       Event      @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  results     Result[]
 
-  event    Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  ageGroup AgeGroup @relation(fields: [ageGroupId], references: [id])
-  results  Result[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  @@unique([eventId, entryNumber])
 }
 
 model Result {
-  id            String @id @default(cuid())
-  eventId       String
+  id            String      @id @default(cuid())
   participantId String
-  ageGroupId    String
   challengeId   String
-
-  rawValue   Float
-  bonusValue Float        @default(0)
-  finalValue Float
-  notes      String?
-  status     ResultStatus @default(ACTIVE)
-
-  event       Event       @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  participant Participant @relation(fields: [participantId], references: [id], onDelete: Cascade)
-  ageGroup    AgeGroup    @relation(fields: [ageGroupId], references: [id])
-  challenge   Challenge   @relation(fields: [challengeId], references: [id])
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  score         Float
+  adjustedScore Float?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  challenge     Challenge   @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+  participant   Participant @relation(fields: [participantId], references: [id], onDelete: Cascade)
 }
 
-model Sponsor {
-  id        String  @id @default(cuid())
-  eventId   String
-  name      String
-  logoUrl   String?
-  website   String?
-  isActive  Boolean @default(true)
-  sortOrder Int     @default(0)
-
-  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+enum ScoringMethod {
+  HIGHEST
+  LOWEST
 }
 
-model Announcement {
-  id        String  @id @default(cuid())
-  eventId   String
-  title     String
-  message   String
-  isActive  Boolean @default(true)
-  sortOrder Int     @default(0)
-
-  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+enum SchoolYear {
+  RECEPTION
+  YEAR1
+  YEAR2
+  YEAR3
+  YEAR4
+  YEAR5
+  YEAR6
+  YEAR7
+  YEAR8
+  YEAR9
+  YEAR10
+  YEAR11
+  YEAR12
+  YEAR13
+  ADULT
 }
