@@ -18,12 +18,7 @@ function getRankForResult(results, index) {
   return index + 1;
 }
 
-function getRankDisplay(rank) {
-  if (rank === 1) return "🥇";
-  if (rank === 2) return "🥈";
-  if (rank === 3) return "🥉";
-  return `${rank}.`;
-}
+
 
 export default function LeaderboardTab({ eventId }) {
   const [results, setResults] = useState([]);
@@ -102,8 +97,7 @@ if (loading) {
         <h2 className="fw-bold mb-2">Leaderboard</h2>
 
         <p className="text-muted mb-0">
-          Awards are calculated per challenge and age group using each
-          participant&apos;s best attempt.
+          Rankings are based on each participant&apos;s best attempt in each challenge.
         </p>
       </div>
 
@@ -149,12 +143,25 @@ if (loading) {
                                 key={result.id}
                               >
                                 <div className="d-flex justify-content-between align-items-center">
-                                  <strong>
-                                   {getRankDisplay(getRankForResult(topResults, index))}{" "}
-                                    {result.participant.firstName}{" "}
-                                    {result.participant.surname}
-                                  </strong>
+                                <div className="d-flex align-items-center gap-2">
+  <span
+    className="badge rounded-pill bg-primary"
+    style={{
+      minWidth: "34px",
+      height: "34px",
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      fontSize: "1rem",
+    }}
+  >
+    {getRankForResult(topResults, index)}
+  </span>
 
+  <strong>
+    {result.participant.firstName} {result.participant.surname}
+  </strong>
+</div>
                                   <span className="fw-bold">
                                     {result.score} {challenge.unit}
                                   </span>
