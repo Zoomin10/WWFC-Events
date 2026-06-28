@@ -79,22 +79,12 @@ export default function LeaderboardTab({ eventId }) {
   return (
     <div>
       <div className="text-center mb-4">
-  <h2 className="fw-bold mb-2">Leaderboard</h2>
+        <h2 className="fw-bold mb-2">Leaderboard</h2>
 
-  <p className="text-muted mb-0">
-    Awards are calculated per challenge and age group using each participant's
-    best attempt.
-  </p>
-</div>
-        <div>
-          <h5 className="mb-1">Leaderboard</h5>
-          <p className="text-muted mb-0">
-            Awards are calculated per challenge and age group using each
-            participant&apos;s best attempt.
-          </p>
-        </div>
-
-      
+        <p className="text-muted mb-0">
+          Awards are calculated per challenge and age group using each
+          participant&apos;s best attempt.
+        </p>
       </div>
 
       {challenges.length === 0 ? (
@@ -104,7 +94,7 @@ export default function LeaderboardTab({ eventId }) {
       ) : (
         challenges.map((challenge) => (
           <div className="card shadow-sm mb-4" key={challenge.id}>
-            <div className="card-header">
+            <div className="card-header text-center">
               <h5 className="mb-0">{challenge.name}</h5>
               <small className="text-muted">
                 {challenge.scoringMethod === "LOWEST"
@@ -123,10 +113,12 @@ export default function LeaderboardTab({ eventId }) {
                   return (
                     <div className="col-md-4" key={ageGroup.key}>
                       <div className="border rounded p-3 h-100">
-                        <h6 className="fw-bold">{ageGroup.label}</h6>
+                        <h6 className="fw-bold text-center">
+                          {ageGroup.label}
+                        </h6>
 
                         {topResults.length === 0 ? (
-                          <p className="text-muted small mb-0">
+                          <p className="text-muted small mb-0 text-center">
                             No results yet.
                           </p>
                         ) : (
