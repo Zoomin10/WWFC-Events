@@ -4,6 +4,7 @@ import { getChallenges } from "../api/challenges";
 import { ageGroups, getAgeGroupForSchoolYear } from "../utils/ageGroups";
 
 
+
 function getRankForResult(results, index) {
   if (index === 0) return 1;
 
@@ -35,10 +36,14 @@ export default function LeaderboardTab({ eventId }) {
   async function loadData() {
     const resultData = await getResults(eventId);
     const challengeData = await getChallenges(eventId);
-
+const [loading, setLoading] = useState(true);
     setResults(resultData);
     setChallenges(challengeData);
+      setLoading(false);
   }
+if (loading) {
+  return null;
+}
 
   function getRankedResults(challenge, ageGroup) {
     const matchingResults = results.filter((result) => {
@@ -103,7 +108,7 @@ export default function LeaderboardTab({ eventId }) {
 
       {challenges.length === 0 ? (
         <div className="alert alert-warning">
-          Add challenges before viewing the leaderboard.
+             No leaderboard results are available yet.
         </div>
       ) : (
         challenges.map((challenge) => (
