@@ -96,11 +96,11 @@ export default function ResultsTab({ eventId }) {
         </form>
       )}
 
-      <h6>Recent Results</h6>
+      <h6>Recent Attempts</h6>
 
       {results.length === 0 ? (
         <div className="alert alert-secondary">
-          No results entered yet.
+          No attempts entered yet.
         </div>
       ) : (
         <table className="table table-sm align-middle">
@@ -119,10 +119,13 @@ export default function ResultsTab({ eventId }) {
                 <td>
                   {String(result.participant.entryNumber).padStart(3, "0")}
                 </td>
+
                 <td>
                   {result.participant.firstName} {result.participant.surname}
                 </td>
+
                 <td>{result.challenge.name}</td>
+
                 <td>
                   {result.score} {result.challenge.unit}
                 </td>

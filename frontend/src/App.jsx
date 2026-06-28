@@ -5,6 +5,7 @@ import DashboardPage from "./pages/DashboardPage";
 import EventsPage from "./pages/EventsPage";
 import SettingsPage from "./pages/SettingsPage";
 import ManageEventPage from "./pages/ManageEventPage";
+import PublicLeaderboardPage from "./pages/PublicLeaderboardPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/events" element={<EventsPage />} />
           <Route path="/events/:id" element={<ManageEventPage />} />
           <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/events/:id/leaderboard" element={<PublicLeaderboardPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

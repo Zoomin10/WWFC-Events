@@ -3,6 +3,13 @@ import { getResults } from "../api/results";
 import { getChallenges } from "../api/challenges";
 import { ageGroups, getAgeGroupForSchoolYear } from "../utils/ageGroups";
 
+function getMedal(index) {
+  if (index === 0) return "🥇";
+  if (index === 1) return "🥈";
+  if (index === 2) return "🥉";
+  return `${index + 1}.`;
+}
+
 export default function LeaderboardTab({ eventId }) {
   const [results, setResults] = useState([]);
   const [challenges, setChallenges] = useState([]);
@@ -19,52 +26,71 @@ export default function LeaderboardTab({ eventId }) {
     setChallenges(challengeData);
   }
 
-function getResultsForChallengeAndAgeGroup(challenge, ageGroup) {
-  const matchingResults = results.filter((result) => {
-    const resultAgeGroup = getAgeGroupForSchoolYear(
-      result.participant.schoolYear
-    );
+  function getRankedResults(challenge, ageGroup) {
+    const matchingResults = results.filter((result) => {
+      const resultAgeGroup = getAgeGroupForSchoolYear(
+        result.participant.schoolYear
+      );
 
-    return (
-      result.challengeId === challenge.id &&
-      resultAgeGroup?.key === ageGroup.key
-    );
-  });
+      return (
+        result.challengeId === challenge.id &&
+        resultAgeGroup?.key === ageGroup.key
+      );
+    });
 
-  const bestResultByParticipant = new Map();
+    const bestByParticipant = new Map();
 
-  matchingResults.forEach((result) => {
-    const participantId = result.participant.id;
-    const existing = bestResultByParticipant.get(participantId);
+    matchingResults.forEach((result) => {
+      const participantId = result.participant.id;
+      const existing = bestByParticipant.get(participantId);
 
-    if (!existing) {
-      bestResultByParticipant.set(participantId, result);
-      return;
-    }
-
-    if (challenge.scoringMethod === "LOWEST") {
-      if (result.score < existing.score) {
-        bestResultByParticipant.set(participantId, result);
+      if (!existing) {
+        bestByParticipant.set(participantId, {
+          ...result,
+          attemptCount: 1,
+        });
+        return;
       }
-    } else {
-      if (result.score > existing.score) {
-        bestResultByParticipant.set(participantId, result);
+
+      existing.attemptCount += 1;
+
+      const isBetter =
+        challenge.scoringMethod === "LOWEST"
+          ? result.score < existing.score
+          : result.score > existing.score;
+
+      if (isBetter) {
+        bestByParticipant.set(participantId, {
+          ...result,
+          attemptCount: existing.attemptCount,
+        });
       }
-    }
-  });
+    });
 
-  return Array.from(bestResultByParticipant.values()).sort((a, b) => {
-    if (challenge.scoringMethod === "LOWEST") {
-      return a.score - b.score;
-    }
+    return Array.from(bestByParticipant.values()).sort((a, b) => {
+      if (challenge.scoringMethod === "LOWEST") {
+        return a.score - b.score;
+      }
 
-    return b.score - a.score;
-  });
-}
+      return b.score - a.score;
+    });
+  }
 
   return (
     <div>
-      <h5>Leaderboard</h5>
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h5 className="mb-1">Leaderboard</h5>
+          <p className="text-muted mb-0">
+            Awards are calculated per challenge and age group using each
+            participant&apos;s best attempt.
+          </p>
+        </div>
+
+        <button className="btn btn-outline-primary btn-sm" onClick={loadData}>
+          Refresh
+        </button>
+      </div>
 
       {challenges.length === 0 ? (
         <div className="alert alert-warning">
@@ -72,61 +98,64 @@ function getResultsForChallengeAndAgeGroup(challenge, ageGroup) {
         </div>
       ) : (
         challenges.map((challenge) => (
-          <div className="card mb-4" key={challenge.id}>
-            <div className="card-header fw-bold">
-              {challenge.name}
+          <div className="card shadow-sm mb-4" key={challenge.id}>
+            <div className="card-header">
+              <h5 className="mb-0">{challenge.name}</h5>
+              <small className="text-muted">
+                {challenge.scoringMethod === "LOWEST"
+                  ? "Lowest score wins"
+                  : "Highest score wins"}{" "}
+                · {challenge.unit}
+              </small>
             </div>
 
             <div className="card-body">
-              {ageGroups.map((ageGroup) => {
-                const rankedResults = getResultsForChallengeAndAgeGroup(
-                  challenge,
-                  ageGroup
-                );
+              <div className="row g-3">
+                {ageGroups.map((ageGroup) => {
+                  const rankedResults = getRankedResults(challenge, ageGroup);
+                  const topResults = rankedResults.slice(0, 3);
 
-                return (
-                  <div className="mb-4" key={ageGroup.key}>
-                    <h6>{ageGroup.label}</h6>
+                  return (
+                    <div className="col-md-4" key={ageGroup.key}>
+                      <div className="border rounded p-3 h-100">
+                        <h6 className="fw-bold">{ageGroup.label}</h6>
 
-                    {rankedResults.length === 0 ? (
-                      <p className="text-muted mb-0">
-                        No results yet.
-                      </p>
-                    ) : (
-                      <table className="table table-sm align-middle">
-                        <thead>
-                          <tr>
-                            <th>Rank</th>
-                            <th>Entry</th>
-                            <th>Name</th>
-                            <th>Score</th>
-                          </tr>
-                        </thead>
+                        {topResults.length === 0 ? (
+                          <p className="text-muted small mb-0">
+                            No results yet.
+                          </p>
+                        ) : (
+                          <div className="d-grid gap-2">
+                            {topResults.map((result, index) => (
+                              <div
+                                className="border rounded p-2 bg-light"
+                                key={result.id}
+                              >
+                                <div className="d-flex justify-content-between align-items-center">
+                                  <strong>
+                                    {getMedal(index)}{" "}
+                                    {result.participant.firstName}{" "}
+                                    {result.participant.surname}
+                                  </strong>
 
-                        <tbody>
-                          {rankedResults.map((result, index) => (
-                            <tr key={result.id}>
-                              <td>{index + 1}</td>
-                              <td>
-                                {String(
-                                  result.participant.entryNumber
-                                ).padStart(3, "0")}
-                              </td>
-                              <td>
-                                {result.participant.firstName}{" "}
-                                {result.participant.surname}
-                              </td>
-                              <td>
-                                {result.score} {challenge.unit}
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    )}
-                  </div>
-                );
-              })}
+                                  <span className="fw-bold">
+                                    {result.score} {challenge.unit}
+                                  </span>
+                                </div>
+
+                                <div className="text-muted small mt-1">
+                                  Best of {result.attemptCount} attempt
+                                  {result.attemptCount === 1 ? "" : "s"}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         ))
