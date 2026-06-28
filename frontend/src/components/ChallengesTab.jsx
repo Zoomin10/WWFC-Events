@@ -239,3 +239,4 @@ async function handleDeleteChallenge(challengeId) {
     )}
   </div>
 );
+}
