@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3001/api";
+import API_URL from "./api";
 
 export async function getResults(eventId) {
   const response = await fetch(`${API_URL}/events/${eventId}/results`);

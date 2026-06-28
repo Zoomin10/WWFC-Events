@@ -1,4 +1,5 @@
-const API_URL = "http://localhost:3001/api";
+import API_URL from "./api";
+
 
 export async function getChallenges(eventId) {
   const response = await fetch(
