@@ -18,6 +18,7 @@ function App() {
           <Route path="/events/:id" element={<ManageEventPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/events/:id/leaderboard" element={<PublicLeaderboardPage />} />
+          <Route path="/live" element={<LiveLeaderboardPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
