@@ -3,7 +3,7 @@ import prisma from "../prisma/prisma.js";
 export async function getAllEvents() {
   return await prisma.event.findMany({
     orderBy: {
-      eventDate: "desc",
+      eventDate: "asc",
     },
   });
 }
