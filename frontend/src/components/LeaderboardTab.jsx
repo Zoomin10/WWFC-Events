@@ -78,7 +78,14 @@ export default function LeaderboardTab({ eventId }) {
 
   return (
     <div>
-      <div className="d-flex justify-content-between align-items-center mb-4">
+      <div className="text-center mb-4">
+  <h2 className="fw-bold mb-2">Leaderboard</h2>
+
+  <p className="text-muted mb-0">
+    Awards are calculated per challenge and age group using each participant's
+    best attempt.
+  </p>
+</div>
         <div>
           <h5 className="mb-1">Leaderboard</h5>
           <p className="text-muted mb-0">
