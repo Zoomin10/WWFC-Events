@@ -92,98 +92,120 @@ if (loading) {
   }
 
   return (
-    <div>
-      <div className="text-center mb-4">
-        <h2 className="fw-bold mb-2">Leaderboard</h2>
+  <div>
+    <div className="text-center mb-4">
+      <h2 className="fw-bold mb-2">Leaderboard</h2>
 
-        <p className="text-muted mb-0">
-          Rankings are based on each participant&apos;s best attempt in each challenge.
-        </p>
+      <p className="text-muted mb-0">
+        Rankings are based on each participant&apos;s best attempt in each
+        challenge.
+      </p>
+    </div>
+
+    {challenges.length === 0 ? (
+      <div className="text-center text-muted py-4">
+        No leaderboard results are available yet.
       </div>
+    ) : (
+      challenges.map((challenge) => (
+        <div className="card shadow mb-5 border-0" key={challenge.id}>
+          <div
+            className="card-header text-center text-white py-3"
+            style={{
+              background: "linear-gradient(135deg, #0057B8, #007BFF)",
+            }}
+          >
+            <h4 className="mb-1 fw-bold">{challenge.name}</h4>
 
-      {challenges.length === 0 ? (
-        <div className="alert alert-warning">
-             No leaderboard results are available yet.
-        </div>
-      ) : (
-        challenges.map((challenge) => (
-          <div className="card shadow-sm mb-4" key={challenge.id}>
-            <div className="card-header text-center">
-              <h5 className="mb-0">{challenge.name}</h5>
-              <small className="text-muted">
-                {challenge.scoringMethod === "LOWEST"
-                  ? "Lowest score wins"
-                  : "Highest score wins"}{" "}
-                · {challenge.unit}
-              </small>
-            </div>
+            <small className="text-white-50">
+              {challenge.scoringMethod === "LOWEST"
+                ? "Lowest score wins"
+                : "Highest score wins"}{" "}
+              • {challenge.unit}
+            </small>
+          </div>
 
-            <div className="card-body">
-              <div className="row g-3">
-                {ageGroups.map((ageGroup) => {
-                  const rankedResults = getRankedResults(challenge, ageGroup);
-                  const topResults = rankedResults.slice(0, 3);
+          <div className="card-body bg-white">
+            <div className="row g-4">
+              {ageGroups.map((ageGroup) => {
+                const rankedResults = getRankedResults(challenge, ageGroup);
+                const topResults = rankedResults.slice(0, 3);
 
-                  return (
-                    <div className="col-md-4" key={ageGroup.key}>
-                      <div className="border rounded p-3 h-100">
-                        <h6 className="fw-bold text-center">
-                          {ageGroup.label}
-                        </h6>
+                return (
+                  <div className="col-md-4" key={ageGroup.key}>
+                    <div className="border rounded-3 p-3 h-100 bg-light">
+                      <h6
+                        className="fw-bold text-center text-white rounded py-2 mb-3"
+                        style={{ backgroundColor: "#6c757d" }}
+                      >
+                        {ageGroup.label}
+                      </h6>
 
-                        {topResults.length === 0 ? (
-                          <p className="text-muted small mb-0 text-center">
-                            No results yet.
-                          </p>
-                        ) : (
-                          <div className="d-grid gap-2">
-                            {topResults.map((result, index) => (
-                              <div
-                                className="border rounded p-2 bg-light"
-                                key={result.id}
-                              >
-                                <div className="d-flex justify-content-between align-items-center">
+                      {topResults.length === 0 ? (
+                        <p className="text-muted small mb-0 text-center">
+                          No results yet.
+                        </p>
+                      ) : (
+                        <div className="d-grid gap-3">
+                          {topResults.map((result, index) => (
+                            <div
+                              className="border rounded-3 p-3 bg-white shadow-sm"
+                              key={result.id}
+                            >
+                              <div className="d-flex justify-content-between align-items-center gap-3">
                                 <div className="d-flex align-items-center gap-2">
-  <span
-    className="badge rounded-pill bg-primary"
-    style={{
-      minWidth: "34px",
-      height: "34px",
-      display: "inline-flex",
-      alignItems: "center",
-      justifyContent: "center",
-      fontSize: "1rem",
-    }}
-  >
-    {getRankForResult(topResults, index)}
-  </span>
-
-  <strong>
-    {result.participant.firstName} {result.participant.surname}
-  </strong>
-</div>
-                                  <span className="fw-bold">
-                                    {result.score} {challenge.unit}
+                                  <span
+                                    className={`badge rounded-pill ${
+                                      index === 0
+                                        ? "bg-success"
+                                        : index === 1
+                                        ? "bg-primary"
+                                        : "bg-secondary"
+                                    }`}
+                                    style={{
+                                      minWidth: "36px",
+                                      height: "36px",
+                                      display: "inline-flex",
+                                      alignItems: "center",
+                                      justifyContent: "center",
+                                      fontSize: "1rem",
+                                    }}
+                                  >
+                                    {getRankForResult(topResults, index)}
                                   </span>
+
+                                  <strong>
+                                    {result.participant.firstName}{" "}
+                                    {result.participant.surname}
+                                  </strong>
                                 </div>
 
-                                <div className="text-muted small mt-1">
-                                  Best of {result.attemptCount} attempt
-                                  {result.attemptCount === 1 ? "" : "s"}
-                                </div>
+                                <span
+                                  className="fw-bold text-primary text-nowrap"
+                                  style={{ fontSize: "1.25rem" }}
+                                >
+                                  {result.score}{" "}
+                                  <small>{challenge.unit}</small>
+                                </span>
                               </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
+
+                              <div className="text-muted small mt-2">
+                                Best of {result.attemptCount} attempt
+                                {result.attemptCount === 1 ? "" : "s"}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                  );
-                })}
-              </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
-        ))
-      )}
-    </div>
-  );
+        </div>
+      ))
+    )}
+  </div>
+);
 }
