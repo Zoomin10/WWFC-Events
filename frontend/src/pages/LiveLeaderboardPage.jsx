@@ -100,10 +100,10 @@ return (
 
       <LeaderboardTab eventId={event.id} />
 
+ 
     </div>
-    <LeaderboardTab eventId={event.id} />
+  <SponsorFooter />
+ </>
 
-<SponsorFooter />
-  </>
 );
 }
