@@ -25,3 +25,19 @@ export async function createChallenge(eventId, data) {
     },
   });
 }
+export async function updateChallenge(id, data) {
+  return prisma.challenge.update({
+    where: { id },
+    data: {
+      name: data.name,
+      scoringMethod: data.scoringMethod,
+      unit: data.unit,
+    },
+  });
+}
+
+export async function deleteChallenge(id) {
+  return prisma.challenge.delete({
+    where: { id },
+  });
+}

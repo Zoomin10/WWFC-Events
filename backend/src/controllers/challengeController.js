@@ -32,3 +32,26 @@ export async function createChallenge(req, res) {
     });
   }
 }
+export async function updateChallenge(req, res) {
+  try {
+    const challenge = await challengeService.updateChallenge(
+      req.params.challengeId,
+      req.body
+    );
+
+    res.status(200).json(challenge);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to update challenge" });
+  }
+}
+
+export async function deleteChallenge(req, res) {
+  try {
+    await challengeService.deleteChallenge(req.params.challengeId);
+    res.status(204).send();
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to delete challenge" });
+  }
+}
