@@ -41,17 +41,17 @@ export default function LiveLeaderboardPage() {
 
 return (
   <>
-    <div className="bg-primary text-center shadow-sm py-3">
-      <img
-        src="/images/logo-horizontal.png"
-        alt="Wroughton & Wichelstowe FC"
-        style={{
-          width: "90%",
-          maxWidth: "650px",
-          height: "auto",
-        }}
-      />
-    </div>
+  <div className="bg-primary text-center shadow-sm py-3">
+  <img
+    src="/images/logo-horizontal.png"
+    alt="Wroughton & Wichelstowe FC"
+    style={{
+      width: "90%",
+      maxWidth: "650px",
+      height: "auto",
+    }}
+  />
+</div>
 
     <div className="container py-4">
       <div className="text-center mb-4">
