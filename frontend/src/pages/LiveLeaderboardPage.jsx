@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getActiveEvent } from "../api/events";
 import LeaderboardTab from "../components/LeaderboardTab";
+import SponsorFooter from "../components/SponsorFooter";
 
 export default function LiveLeaderboardPage() {
   const [event, setEvent] = useState(null);
@@ -95,14 +96,14 @@ return (
   </span>
 
 </div>
-
-
-
       </div>
 
       <LeaderboardTab eventId={event.id} />
 
     </div>
+    <LeaderboardTab eventId={event.id} />
+
+<SponsorFooter />
   </>
 );
 }
