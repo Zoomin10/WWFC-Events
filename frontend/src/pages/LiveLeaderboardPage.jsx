@@ -50,8 +50,8 @@ return (
         src="/images/logo-horizontal.png"
         alt="Wroughton & Wichelstowe FC"
         style={{
-          width: "80%",
-          maxWidth: "450px",
+          width: "70%",
+          maxWidth: "380px",
           height: "auto",
         }}
       />
@@ -72,21 +72,25 @@ return (
           {event.name}
         </h1>
 
-        <div className="text-muted mb-1">
-          📅 {new Date(event.eventDate).toLocaleDateString("en-GB")}
-        </div>
+        <div
+  className="d-flex flex-wrap justify-content-center align-items-center gap-4 mt-3 mb-3"
+>
 
-        <div className="text-muted mb-3">
-          📍 {event.location || "Location TBC"}
-        </div>
+  <div className="text-muted">
+    📅 {new Date(event.eventDate).toLocaleDateString("en-GB")}
+  </div>
 
-        <span className="badge bg-success fs-6 px-4 py-2 mb-2">
-          ● LIVE
-        </span>
+  <div className="text-muted">
+    📍 {event.location || "Location TBC"}
+  </div>
 
-        <div className="small text-muted">
-          Results update automatically
-        </div>
+  <span className="badge bg-success fs-6 px-3 py-2">
+    ● LIVE
+  </span>
+
+</div>
+
+
 
       </div>
 
