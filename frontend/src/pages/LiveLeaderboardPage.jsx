@@ -42,9 +42,15 @@ export default function LiveLeaderboardPage() {
 return (
   <>
     {/* Club Banner */}
-    <div
-      className="bg-primary text-center shadow-sm py-2"
-      style={{ overflow: "hidden" }}
+   <div
+  className="text-center border-bottom"
+  style={{
+    backgroundColor: "#f3f4f6",
+    padding: "12px 0",
+    overflow: "hidden",
+    borderBottom: "1px solid #dcdcdc",
+  }}
+
     >
       <img
         src="/images/logo-horizontal.png"

@@ -87,9 +87,7 @@ export default function LeaderboardTab({ eventId }) {
           </p>
         </div>
 
-        <button className="btn btn-outline-primary btn-sm" onClick={loadData}>
-          Refresh
-        </button>
+      
       </div>
 
       {challenges.length === 0 ? (
