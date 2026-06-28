@@ -3,11 +3,25 @@ import { getResults } from "../api/results";
 import { getChallenges } from "../api/challenges";
 import { ageGroups, getAgeGroupForSchoolYear } from "../utils/ageGroups";
 
-function getMedal(index) {
-  if (index === 0) return "🥇";
-  if (index === 1) return "🥈";
-  if (index === 2) return "🥉";
-  return `${index + 1}.`;
+
+function getRankForResult(results, index) {
+  if (index === 0) return 1;
+
+  const previousResult = results[index - 1];
+  const currentResult = results[index];
+
+  if (currentResult.score === previousResult.score) {
+    return getRankForResult(results, index - 1);
+  }
+
+  return index + 1;
+}
+
+function getRankDisplay(rank) {
+  if (rank === 1) return "🥇";
+  if (rank === 2) return "🥈";
+  if (rank === 3) return "🥉";
+  return `${rank}.`;
 }
 
 export default function LeaderboardTab({ eventId }) {
@@ -130,7 +144,7 @@ export default function LeaderboardTab({ eventId }) {
                               >
                                 <div className="d-flex justify-content-between align-items-center">
                                   <strong>
-                                    {getMedal(index)}{" "}
+                                   {getRankDisplay(getRankForResult(topResults, index))}{" "}
                                     {result.participant.firstName}{" "}
                                     {result.participant.surname}
                                   </strong>
