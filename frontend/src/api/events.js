@@ -45,3 +45,12 @@ export async function getEvent(id) {
 
   return response.json();
 }
+export async function getActiveEvent() {
+  const response = await fetch(`${API_URL}/events/active`);
+
+  if (!response.ok) {
+    throw new Error("No active event found");
+  }
+
+  return response.json();
+}

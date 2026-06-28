@@ -71,3 +71,23 @@ export async function getEvent(req, res) {
     });
   }
 }
+export async function getActiveEvent(req, res) {
+  try {
+    const event = await eventService.getActiveEvent();
+
+    if (!event) {
+      return res.status(404).json({
+        message: "No active event found",
+      });
+    }
+
+    res.status(200).json(event);
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: "Failed to retrieve active event",
+    });
+  }
+}
+

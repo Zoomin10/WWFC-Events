@@ -6,6 +6,7 @@ import EventsPage from "./pages/EventsPage";
 import SettingsPage from "./pages/SettingsPage";
 import ManageEventPage from "./pages/ManageEventPage";
 import PublicLeaderboardPage from "./pages/PublicLeaderboardPage";
+import LiveLeaderboardPage from "./pages/LiveLeaderboardPage";
 
 function App() {
   return (

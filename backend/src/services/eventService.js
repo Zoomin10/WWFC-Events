@@ -34,3 +34,15 @@ export async function getEventById(id) {
     },
   });
 }
+export async function getActiveEvent() {
+  return prisma.event.findFirst({
+    where: {
+      isActive: true,
+      isArchived: false,
+    },
+    include: {
+      participants: true,
+      challenges: true,
+    },
+  });
+}
