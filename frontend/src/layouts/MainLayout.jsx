@@ -1,6 +1,13 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 export default function MainLayout() {
+  const location = useLocation();
+  const isLivePage = location.pathname === "/live";
+
+  if (isLivePage) {
+    return <Outlet />;
+  }
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">

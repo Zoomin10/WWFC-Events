@@ -39,21 +39,37 @@ export default function LiveLeaderboardPage() {
     );
   }
 
-  return (
-    <div className="container py-3">
-      <div className="text-center mb-4">
-        <h1 className="h3 fw-bold">🏆 {event.name}</h1>
+return (
+  <div className="container py-4">
 
-        <p className="text-muted mb-1">
-          📍 {event.location || "No location"}
-        </p>
+    <div className="text-center mb-4">
 
-        <p className="text-muted mb-0">
-          📅 {new Date(event.eventDate).toLocaleDateString("en-GB")}
-        </p>
+      <div style={{ fontSize: "3rem" }}>🏆</div>
+
+      <div className="text-uppercase text-primary fw-bold small">
+        WWFC LIVE RESULTS
       </div>
 
-      <LeaderboardTab eventId={event.id} />
+      <h1 className="display-6 fw-bold mb-2">
+        {event.name}
+      </h1>
+
+      <div className="text-muted">
+        {new Date(event.eventDate).toLocaleDateString("en-GB")}
+      </div>
+
+      <div className="text-muted mb-3">
+        {event.location}
+      </div>
+
+      <span className="badge bg-success fs-6">
+        ● LIVE
+      </span>
+
     </div>
-  );
+
+    <LeaderboardTab eventId={event.id} />
+
+  </div>
+);
 }
