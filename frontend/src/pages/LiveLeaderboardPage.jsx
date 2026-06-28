@@ -41,48 +41,57 @@ export default function LiveLeaderboardPage() {
 
 return (
   <>
-   <div>className="bg-primary text-center shadow-sm py-2"
-  style={{ overflow: "hidden" }}
-  <img
-    src="/images/logo-horizontal.png"
-    alt="Wroughton & Wichelstowe FC"
-    style={{
+    {/* Club Banner */}
+    <div
+      className="bg-primary text-center shadow-sm py-2"
+      style={{ overflow: "hidden" }}
+    >
+      <img
+        src="/images/logo-horizontal.png"
+        alt="Wroughton & Wichelstowe FC"
+        style={{
           width: "80%",
-      maxWidth: "450px",
-      height: "auto",
-    }}
-  />
-</div>
+          maxWidth: "450px",
+          height: "auto",
+        }}
+      />
+    </div>
 
     <div className="container py-3">
-      <div className="text-center mb-3">
-        <div style={{ fontSize: "2.8rem" }}>🏆</div>
 
-        <div className="text-uppercase text-primary fw-bold small mb-1">
-          Live Results
+      <div className="text-center mb-4">
+
+        <div className="text-uppercase text-primary fw-bold small mb-2">
+          LIVE RESULTS
         </div>
 
         <h1
           className="fw-bold mb-2"
-          style={{ fontSize: "clamp(2rem, 6vw, 3.5rem)" }}
+          style={{ fontSize: "clamp(2.2rem, 6vw, 3.5rem)" }}
         >
           {event.name}
         </h1>
 
-        <p className="text-muted mb-1">
+        <div className="text-muted mb-1">
           📅 {new Date(event.eventDate).toLocaleDateString("en-GB")}
-        </p>
+        </div>
 
-        <p className="text-muted mb-3">
+        <div className="text-muted mb-3">
           📍 {event.location || "Location TBC"}
-        </p>
+        </div>
 
-        <span className="badge bg-success fs-5 px-4 py-2">
+        <span className="badge bg-success fs-6 px-4 py-2 mb-2">
           ● LIVE
         </span>
+
+        <div className="small text-muted">
+          Results update automatically
+        </div>
+
       </div>
 
       <LeaderboardTab eventId={event.id} />
+
     </div>
   </>
 );
