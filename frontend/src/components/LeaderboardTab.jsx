@@ -28,6 +28,7 @@ function getRankDisplay(rank) {
 export default function LeaderboardTab({ eventId }) {
   const [results, setResults] = useState([]);
   const [challenges, setChallenges] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     loadData();
@@ -36,7 +37,7 @@ export default function LeaderboardTab({ eventId }) {
   async function loadData() {
     const resultData = await getResults(eventId);
     const challengeData = await getChallenges(eventId);
-const [loading, setLoading] = useState(true);
+
     setResults(resultData);
     setChallenges(challengeData);
       setLoading(false);
