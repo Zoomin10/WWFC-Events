@@ -5,6 +5,10 @@ export async function getAllEvents() {
     orderBy: {
       eventDate: "asc",
     },
+    include: {
+      participants: true,
+      challenges: true,
+    },
   });
 }
 

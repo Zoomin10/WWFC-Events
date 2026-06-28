@@ -168,12 +168,12 @@ export default function EventsPage() {
 
                   <div className="row text-center border rounded py-3 mb-3">
                     <div className="col">
-                      <h5 className="mb-0">0</h5>
+                    <h5 className="mb-0">{event.participants?.length || 0}</h5>
                       <small className="text-muted">Participants</small>
                     </div>
 
                     <div className="col">
-                      <h5 className="mb-0">0</h5>
+                     <h5 className="mb-0">{event.challenges?.length || 0}</h5>
                       <small className="text-muted">Challenges</small>
                     </div>
 
