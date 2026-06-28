@@ -46,3 +46,19 @@ export async function getActiveEvent() {
     },
   });
 }
+export async function updateEvent(id, data) {
+  return prisma.event.update({
+    where: { id },
+    data: {
+      name: data.name,
+      location: data.location,
+      eventDate: new Date(data.eventDate),
+    },
+  });
+}
+
+export async function deleteEvent(id) {
+  return prisma.event.delete({
+    where: { id },
+  });
+}

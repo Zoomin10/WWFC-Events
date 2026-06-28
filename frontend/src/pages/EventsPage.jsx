@@ -1,19 +1,47 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getEvents, createEvent, activateEvent } from "../api/events";
+import {
+  getEvents,
+  createEvent,
+  activateEvent,
+  updateEvent,
+  deleteEvent,
+} from "../api/events";
 
 export default function EventsPage() {
   const [events, setEvents] = useState([]);
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [eventDate, setEventDate] = useState("");
-
+const [editingEvent, setEditingEvent] = useState(null);
   useEffect(() => {
     loadEvents();
   }, []);
 
   async function handleActivateEvent(id) {
   await activateEvent(id);
+  await loadEvents();
+}
+async function handleDeleteEvent(id) {
+  const confirmed = window.confirm(
+    "Are you sure you want to delete this event? This will also delete participants, challenges and results."
+  );
+
+  if (!confirmed) return;
+
+  await deleteEvent(id);
+  await loadEvents();
+}
+async function handleUpdateEvent(e) {
+  e.preventDefault();
+
+  await updateEvent(editingEvent.id, {
+    name: editingEvent.name,
+    location: editingEvent.location,
+    eventDate: new Date(editingEvent.eventDate).toISOString(),
+  });
+
+  setEditingEvent(null);
   await loadEvents();
 }
 
@@ -155,6 +183,19 @@ export default function EventsPage() {
 >
   Manage
 </Link>
+<button
+  className="btn btn-outline-secondary btn-sm"
+  onClick={() => setEditingEvent(event)}
+>
+  Edit
+</button>
+
+<button
+  className="btn btn-outline-danger btn-sm"
+  onClick={() => handleDeleteEvent(event.id)}
+>
+  Delete
+</button>
 
               <button className="btn btn-outline-secondary btn-sm" disabled>
                 Archive
