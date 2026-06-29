@@ -17,9 +17,7 @@ export default function MainLayout() {
           </Link>
 
           <div className="navbar-nav">
-            <Link className="nav-link text-white" to="/">
-              Dashboard
-            </Link>
+         
 
             <Link className="nav-link text-white" to="/events">
               Events
