@@ -25,9 +25,15 @@ export default function LeaderboardTab({ eventId }) {
   const [challenges, setChallenges] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+useEffect(() => {
+  loadData();
+
+  const timer = setInterval(() => {
     loadData();
-  }, [eventId]);
+  }, 15000);
+
+  return () => clearInterval(timer);
+}, [eventId]);
 
   async function loadData() {
     const resultData = await getResults(eventId);
