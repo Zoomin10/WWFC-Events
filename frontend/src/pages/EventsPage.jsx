@@ -100,7 +100,7 @@ export default function EventsPage() {
               <label className="form-label">Event Name</label>
               <input
                 className="form-control"
-                placeholder="Summer Fete 2026"
+                placeholder="Enter Event Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
@@ -110,7 +110,7 @@ export default function EventsPage() {
               <label className="form-label">Location</label>
               <input
                 className="form-control"
-                placeholder="The Weir Field"
+                placeholder="Enter Location"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
               />
