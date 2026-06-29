@@ -7,7 +7,7 @@ export default function PublicLeaderboardPage() {
   return (
     <div className="container py-3">
       <div className="text-center mb-3">
-        <h1 className="h3 fw-bold">WWFC Leaderboard</h1>
+        <h1 className="page-title">WWFC Leaderboard</h1>
         <p className="text-muted mb-0">Live challenge standings</p>
       </div>
 

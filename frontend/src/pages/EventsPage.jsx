@@ -87,9 +87,9 @@ export default function EventsPage() {
 
   return (
     <div className="container py-5">
-      <div className="text-center mb-5">
-        <h1 className="display-4 fw-bold">WWFC Events</h1>
-          </div>
+  <div className="text-center mb-5">
+    <h1 className="page-title">WWFC Event Manager</h1>
+  </div>
 
       <div className="card shadow-sm mb-5">
         <div className="card-header fw-bold">Create New Event</div>
