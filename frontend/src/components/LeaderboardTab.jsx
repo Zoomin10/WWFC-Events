@@ -94,13 +94,12 @@ if (loading) {
   return (
   <div>
     <div className="text-center mb-4">
-      <h2 className="fw-bold mb-2">Leaderboard</h2>
+  <h2 className="fw-bold mb-1">Live Leaderboard</h2>
 
-      <p className="text-muted mb-0">
-        Rankings are based on each participant&apos;s best attempt in each
-        challenge.
-      </p>
-    </div>
+  <p className="text-muted small mb-0">
+    Updated automatically throughout the event.
+  </p>
+</div>
 
     {challenges.length === 0 ? (
       <div className="text-center text-muted py-4">
@@ -189,10 +188,7 @@ if (loading) {
                                 </span>
                               </div>
 
-                              <div className="text-muted small mt-2">
-                                Best of {result.attemptCount} attempt
-                                {result.attemptCount === 1 ? "" : "s"}
-                              </div>
+                            
                             </div>
                           ))}
                         </div>
