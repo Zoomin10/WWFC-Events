@@ -13,7 +13,7 @@ export default function MainLayout() {
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
         <div className="container">
           <Link className="navbar-brand fw-bold" to="/">
-            WWFC Events - Admin Site
+            WWFC Event Management - Admin Site
           </Link>
 
        
