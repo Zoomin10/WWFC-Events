@@ -33,9 +33,7 @@ const [editingResult, setEditingResult] = useState(null);
 async function handleUpdateResult(e) {
   e.preventDefault();
 
-  await updateResult(
-    editingResult.id,
-    Number(editingResult.score)
+await updateResult(eventId, editingResult.id, Number(editingResult.score)
   );
 
   setEditingResult(null);
@@ -49,7 +47,7 @@ async function handleDeleteResult(id) {
 
   if (!confirmed) return;
 
-  await deleteResult(id);
+  await deleteResult(eventId, id);
   await loadResults();
 }
 

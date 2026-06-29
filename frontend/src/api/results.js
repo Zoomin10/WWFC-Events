@@ -25,14 +25,17 @@ export async function createResult(eventId, result) {
 
   return response.json();
 }
-export async function updateResult(resultId, score) {
-  const response = await fetch(`${API_URL}/results/${resultId}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ score }),
-  });
+export async function updateResult(eventId, resultId, score) {
+  const response = await fetch(
+    `${API_URL}/events/${eventId}/results/${resultId}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ score }),
+    }
+  );
 
   if (!response.ok) {
     throw new Error("Failed to update result");
@@ -41,10 +44,13 @@ export async function updateResult(resultId, score) {
   return response.json();
 }
 
-export async function deleteResult(resultId) {
-  const response = await fetch(`${API_URL}/results/${resultId}`, {
-    method: "DELETE",
-  });
+export async function deleteResult(eventId, resultId) {
+  const response = await fetch(
+    `${API_URL}/events/${eventId}/results/${resultId}`,
+    {
+      method: "DELETE",
+    }
+  );
 
   if (!response.ok) {
     throw new Error("Failed to delete result");
