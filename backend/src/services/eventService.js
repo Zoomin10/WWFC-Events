@@ -6,7 +6,11 @@ export async function getAllEvents() {
       eventDate: "asc",
     },
     include: {
-      participants: true,
+      participants: {
+        include: {
+          results: true,
+        },
+      },
       challenges: true,
     },
   });

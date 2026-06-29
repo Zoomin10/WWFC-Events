@@ -178,7 +178,12 @@ export default function EventsPage() {
   </div>
 
   <div className="col">
-    <h5 className="mb-0">-</h5>
+   <h5 className="mb-0">
+  {event.participants?.reduce(
+    (total, participant) => total + (participant.results?.length ?? 0),
+    0
+  ) ?? 0}
+</h5>
     <small className="text-muted">Results</small>
   </div>
 </div>
