@@ -68,9 +68,7 @@ return (
 
       <div className="text-center mb-4">
 
-        <div className="text-uppercase text-primary fw-bold small mb-2">
-          LIVE RESULTS
-        </div>
+      
 
         <h1
           className="fw-bold mb-2"
