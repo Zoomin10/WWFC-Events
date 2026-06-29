@@ -16,17 +16,7 @@ export default function MainLayout() {
             WWFC Events - Admin Site
           </Link>
 
-          <div className="navbar-nav">
-         
-
-            <Link className="nav-link text-white" to="/events">
-              Events
-            </Link>
-
-            <Link className="nav-link text-white" to="/settings">
-              Settings
-            </Link>
-          </div>
+       
         </div>
       </nav>
 
