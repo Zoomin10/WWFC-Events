@@ -70,12 +70,9 @@ return (
 
       
 
-        <h1
-          className="fw-bold mb-2"
-          style={{ fontSize: "clamp(2.2rem, 6vw, 3.5rem)" }}
-        >
-          {event.name}
-        </h1>
+       <h1 className="page-title mb-2">
+  {event.name}
+</h1>
 
         <div
   className="d-flex flex-wrap justify-content-center align-items-center gap-4 mt-3 mb-3"
