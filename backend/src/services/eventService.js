@@ -37,7 +37,11 @@ export async function getEventById(id) {
   return prisma.event.findUnique({
     where: { id },
     include: {
-      participants: true,
+      participants: {
+        include: {
+          results: true,
+        },
+      },
       challenges: true,
     },
   });

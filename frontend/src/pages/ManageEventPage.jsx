@@ -75,8 +75,13 @@ export default function ManageEventPage() {
         <div className="col-md-4">
           <div className="card text-center shadow-sm">
             <div className="card-body">
-              <h3>0</h3>
-              <p className="text-muted mb-0">Results</p>
+             <h3>
+  {event.participants?.reduce(
+    (total, participant) => total + (participant.results?.length ?? 0),
+    0
+  ) ?? 0}
+</h3>
+<p className="text-muted mb-0">Results</p>
             </div>
           </div>
         </div>
