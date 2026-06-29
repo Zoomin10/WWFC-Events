@@ -101,7 +101,7 @@ async function handleDeleteChallenge(challengeId) {
           <option>Goals</option>
           <option>Seconds</option>
           <option>Metres</option>
-          <option>Centimetres</option>
+          <option>Saves</option>
           <option>Repetitions</option>
         </select>
       </div>
@@ -215,7 +215,7 @@ async function handleDeleteChallenge(challengeId) {
                 <option>Goals</option>
                 <option>Seconds</option>
                 <option>Metres</option>
-                <option>Centimetres</option>
+                <option>Saves</option>
                 <option>Repetitions</option>
               </select>
             </div>
