@@ -46,3 +46,21 @@ export async function createResult(eventId, data) {
     },
   });
 }
+export async function updateResult(id, data) {
+  return prisma.result.update({
+    where: { id },
+    data: {
+      score: Number(data.score),
+    },
+    include: {
+      participant: true,
+      challenge: true,
+    },
+  });
+}
+
+export async function deleteResult(id) {
+  return prisma.result.delete({
+    where: { id },
+  });
+}

@@ -5,5 +5,7 @@ const router = Router({ mergeParams: true });
 
 router.get("/", resultController.getResults);
 router.post("/", resultController.createResult);
+router.put("/:resultId", resultController.updateResult);
+router.delete("/:resultId", resultController.deleteResult);
 
 export default router;

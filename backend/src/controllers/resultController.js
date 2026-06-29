@@ -23,3 +23,26 @@ export async function createResult(req, res) {
     res.status(400).json({ message: error.message || "Failed to create result" });
   }
 }
+export async function updateResult(req, res) {
+  try {
+    const result = await resultService.updateResult(
+      req.params.resultId,
+      req.body
+    );
+
+    res.status(200).json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to update result" });
+  }
+}
+
+export async function deleteResult(req, res) {
+  try {
+    await resultService.deleteResult(req.params.resultId);
+    res.status(204).send();
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to delete result" });
+  }
+}
