@@ -37,7 +37,7 @@ await updateResult(eventId, editingResult.id, Number(editingResult.score)
   );
 
   setEditingResult(null);
-  await loadResults();
+ await loadData();
 }
 
 async function handleDeleteResult(id) {
@@ -48,7 +48,7 @@ async function handleDeleteResult(id) {
   if (!confirmed) return;
 
   await deleteResult(eventId, id);
-  await loadResults();
+await loadData();
 }
 
   async function handleCreateResult(e) {
