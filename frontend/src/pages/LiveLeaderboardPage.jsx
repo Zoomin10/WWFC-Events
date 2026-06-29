@@ -70,7 +70,7 @@ return (
 
       
 
-       <h1 className="page-title">
+       <h1 className="page-title mb-2">
   {event.name}
 </h1>
 
