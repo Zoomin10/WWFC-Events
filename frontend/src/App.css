@@ -19,6 +19,36 @@
 body {
     font-family: "Poppins", sans-serif;
 }
+.admin-page {
+  background: #f4f6f9;
+  min-height: 100vh;
+}
+
+.admin-card {
+  border: 0;
+  border-radius: 16px;
+}
+
+.admin-section-title {
+  font-weight: 700;
+  color: #004a99;
+}
+
+.stat-box {
+  background: #f8fafc;
+  border-radius: 12px;
+}
+
+.event-card {
+  border: 0;
+  border-radius: 16px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.08) !important;
+}
 .page-title {
 
   font-family: "Poppins", sans-serif;

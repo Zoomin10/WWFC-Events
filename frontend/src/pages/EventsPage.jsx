@@ -86,12 +86,13 @@ export default function EventsPage() {
   }
 
   return (
+    <div className="admin-page">
     <div className="container py-5">
   <div className="text-center mb-5">
     <h1 className="page-title">WWFC Event Manager</h1>
   </div>
 
-      <div className="card shadow-sm mb-5">
+      <div className="card admin-card shadow-sm mb-5">
         <div className="card-header fw-bold">Create New Event</div>
 
         <div className="card-body">
@@ -133,7 +134,7 @@ export default function EventsPage() {
         </div>
       </div>
 
-      <h2 className="mb-3">Events</h2>
+    <h2 className="admin-section-title mb-3">Existing Events</h2>
 
       {events.length === 0 ? (
         <div className="alert alert-secondary">
@@ -143,7 +144,7 @@ export default function EventsPage() {
         <div className="row g-3">
           {events.map((event) => (
             <div className="col-md-6" key={event.id}>
-              <div className="card shadow-sm h-100">
+           <div className="card event-card shadow-sm h-100">
                 <div className="card-body">
                   <div className="d-flex justify-content-between align-items-start mb-3">
                     <div>
@@ -165,7 +166,7 @@ export default function EventsPage() {
                     📍 {event.location || "No location"}
                   </p>
 
-                 <div className="row text-center border rounded py-3 mb-3">
+                 <div className="row text-center stat-box py-3 mb-3">
   <div className="col">
     <h5 className="mb-0">{event.participants?.length ?? 0}</h5>
     <small className="text-muted">Participants</small>
@@ -296,6 +297,7 @@ export default function EventsPage() {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 }
