@@ -1,11 +1,13 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
 
 import MainLayout from "./layouts/MainLayout";
-import DashboardPage from "./pages/DashboardPage";
 import EventsPage from "./pages/EventsPage";
-import SettingsPage from "./pages/SettingsPage";
 import ManageEventPage from "./pages/ManageEventPage";
-import PublicLeaderboardPage from "./pages/PublicLeaderboardPage";
 import LiveLeaderboardPage from "./pages/LiveLeaderboardPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LoginPage from "./pages/LoginPage";
