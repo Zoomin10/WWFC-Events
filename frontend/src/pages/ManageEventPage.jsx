@@ -34,12 +34,7 @@ export default function ManageEventPage() {
       <div className="d-flex justify-content-between align-items-start mb-4">
         <div>
           <h1>{event.name}</h1>
-          <Link
-  to={`/events/${id}/leaderboard`}
-  className="btn btn-outline-primary btn-sm mt-2"
->
-  Public Leaderboard
-</Link>
+
           <p className="text-muted mb-0">
             📍 {event.location || "No location"} · 📅{" "}
             {new Date(event.eventDate).toLocaleDateString("en-GB")}
