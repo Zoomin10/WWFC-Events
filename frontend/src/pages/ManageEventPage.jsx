@@ -25,123 +25,146 @@ export default function ManageEventPage() {
     return <p>Loading event...</p>;
   }
 
-  return (
-    <div>
-      <Link to="/events" className="btn btn-outline-secondary btn-sm mb-3">
-        ← Back to Events
-      </Link>
+return (
+  <div>
+    <Link to="/events" className="btn btn-outline-secondary btn-sm mb-4">
+      ← Back to Events
+    </Link>
 
-      <div className="d-flex justify-content-between align-items-start mb-4">
-        <div>
-          <h1>{event.name}</h1>
+    <div className="d-flex justify-content-between align-items-start mb-4">
+      <div>
+        <h1 className="page-title mb-2">{event.name}</h1>
 
-          <p className="text-muted mb-0">
-            📍 {event.location || "No location"} · 📅{" "}
-            {new Date(event.eventDate).toLocaleDateString("en-GB")}
-          </p>
-        </div>
-
-        {event.isActive ? (
-          <span className="badge bg-success">Active</span>
-        ) : (
-          <span className="badge bg-secondary">Inactive</span>
-        )}
+        <p className="text-muted mb-0">
+          📍 {event.location || "No location"} &nbsp; • &nbsp;
+          📅 {new Date(event.eventDate).toLocaleDateString("en-GB")}
+        </p>
       </div>
 
-      <div className="row g-3 mb-4">
+      {event.isActive ? (
+        <span className="badge bg-success fs-6 px-3 py-2">
+          Active
+        </span>
+      ) : (
+        <span className="badge bg-secondary fs-6 px-3 py-2">
+          Inactive
+        </span>
+      )}
+    </div>
+
+    <ul className="nav nav-tabs event-tabs mb-4">
+      <li className="nav-item">
+        <button
+          className={`nav-link ${
+            activeTab === "participants" ? "active" : ""
+          }`}
+          onClick={() => setActiveTab("participants")}
+        >
+          Participants
+        </button>
+      </li>
+
+      <li className="nav-item">
+        <button
+          className={`nav-link ${
+            activeTab === "challenges" ? "active" : ""
+          }`}
+          onClick={() => setActiveTab("challenges")}
+        >
+          Challenges
+        </button>
+      </li>
+
+      <li className="nav-item">
+        <button
+          className={`nav-link ${
+            activeTab === "results" ? "active" : ""
+          }`}
+          onClick={() => setActiveTab("results")}
+        >
+          Results
+        </button>
+      </li>
+
+      <li className="nav-item">
+        <button
+          className={`nav-link ${
+            activeTab === "leaderboard" ? "active" : ""
+          }`}
+          onClick={() => setActiveTab("leaderboard")}
+        >
+          Leaderboard
+        </button>
+      </li>
+    </ul>
+
+    <div className="stats-panel mb-4">
+      <div className="row g-4">
+
         <div className="col-md-4">
-          <div className="card text-center shadow-sm">
+          <div className="card text-center shadow-sm h-100">
             <div className="card-body">
-              <h3>{event.participants?.length ?? 0}</h3>
+              <h2 className="display-5 fw-bold text-primary">
+                {event.participants?.length ?? 0}
+              </h2>
               <p className="text-muted mb-0">Participants</p>
             </div>
           </div>
         </div>
 
         <div className="col-md-4">
-          <div className="card text-center shadow-sm">
+          <div className="card text-center shadow-sm h-100">
             <div className="card-body">
-             <h3>{event.challenges?.length ?? 0}</h3>
+              <h2 className="display-5 fw-bold text-primary">
+                {event.challenges?.length ?? 0}
+              </h2>
               <p className="text-muted mb-0">Challenges</p>
             </div>
           </div>
         </div>
 
         <div className="col-md-4">
-          <div className="card text-center shadow-sm">
+          <div className="card text-center shadow-sm h-100">
             <div className="card-body">
-             <h3>
-  {event.participants?.reduce(
-    (total, participant) => total + (participant.results?.length ?? 0),
-    0
-  ) ?? 0}
-</h3>
-<p className="text-muted mb-0">Results</p>
+              <h2 className="display-5 fw-bold text-primary">
+                {event.participants?.reduce(
+                  (total, participant) =>
+                    total + (participant.results?.length ?? 0),
+                  0
+                ) ?? 0}
+              </h2>
+              <p className="text-muted mb-0">Results</p>
             </div>
           </div>
         </div>
-      </div>
 
-      <ul className="nav nav-tabs event-tabs">
-  <li className="nav-item">
-    <button
-      className={`nav-link ${activeTab === "participants" ? "active" : ""}`}
-      onClick={() => setActiveTab("participants")}
-    >
-      Participants
-    </button>
-  </li>
-
-  <li className="nav-item">
-    <button
-      className={`nav-link ${activeTab === "challenges" ? "active" : ""}`}
-      onClick={() => setActiveTab("challenges")}
-    >
-      Challenges
-    </button>
-  </li>
-
-  <li className="nav-item">
-    <button
-      className={`nav-link ${activeTab === "results" ? "active" : ""}`}
-      onClick={() => setActiveTab("results")}
-    >
-      Results
-    </button>
-  </li>
-
-  <li className="nav-item">
-    <button
-      className={`nav-link ${activeTab === "leaderboard" ? "active" : ""}`}
-      onClick={() => setActiveTab("leaderboard")}
-    >
-      Leaderboard
-    </button>
-  </li>
-</ul>
-
-      <div className="card shadow-sm border-top-0 rounded-top-0">
-        <div className="card-body">
-          {activeTab === "overview" && (
-            <div>
-              <h5>Overview</h5>
-              <p className="text-muted mb-0">
-                Event summary and setup information will appear here.
-              </p>
-            </div>
-          )}
-
-          {activeTab === "participants" && (
-            <ParticipantsTab eventId={id} onParticipantsChanged={loadEvent} />
-          )}
-
-          {activeTab === "challenges" && <ChallengesTab eventId={id} />}
-
-          {activeTab === "results" && <ResultsTab eventId={id} />}
-
-          {activeTab === "leaderboard" && <LeaderboardTab eventId={id} />}
-        </div>
       </div>
     </div>
-  );
+
+    <div className="card shadow-sm">
+      <div className="card-body">
+
+        {activeTab === "participants" && (
+          <ParticipantsTab
+            eventId={id}
+            onParticipantsChanged={loadEvent}
+          />
+        )}
+
+        {activeTab === "challenges" && (
+          <ChallengesTab eventId={id} />
+        )}
+
+        {activeTab === "results" && (
+          <ResultsTab eventId={id} />
+        )}
+
+        {activeTab === "leaderboard" && (
+          <LeaderboardTab eventId={id} />
+        )}
+
+      </div>
+    </div>
+  </div>
+);
 }
