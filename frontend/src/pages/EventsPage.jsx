@@ -128,7 +128,7 @@ export default function EventsPage() {
             </div>
 
             <button className="btn btn-primary" type="submit">
-              Create Event
+              Create New Event
             </button>
           </form>
         </div>
