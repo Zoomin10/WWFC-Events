@@ -187,7 +187,7 @@ setSelectedParticipant(null);
       <table className="table table-hover align-middle">
         <thead>
           <tr>
-            <th>Entry</th>
+            <th>Number</th>
             <th>Participant</th>
             <th>Challenge</th>
             <th>Score</th>

@@ -81,7 +81,7 @@ export default function ParticipantsTab({ eventId, onParticipantsChanged }) {
 
         <div className="col-md-3">
           <button className="btn btn-primary w-100" type="submit">
-            Add Participant
+            Add New Participant
           </button>
         </div>
       </form>
@@ -94,7 +94,7 @@ export default function ParticipantsTab({ eventId, onParticipantsChanged }) {
         <table className="table table-sm align-middle">
           <thead>
             <tr>
-              <th>Entry</th>
+              <th>Assigned Number</th>
               <th>Name</th>
               <th>School Year</th>
             </tr>
