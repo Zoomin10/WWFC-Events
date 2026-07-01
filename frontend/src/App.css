@@ -85,6 +85,53 @@ body {
     transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
       scale(1.4);
   }
+/* Event Management Tabs */
+
+.event-tabs {
+  border-bottom: none;
+  gap: 10px;
+  margin-bottom: 2rem;
+}
+
+.event-tabs .nav-link {
+  border: none;
+  border-radius: 12px;
+  color: #004a99;
+  font-weight: 600;
+  padding: 12px 22px;
+  transition: all 0.2s ease;
+  background: #f3f6fb;
+}
+
+.event-tabs .nav-link:hover {
+  background: #dce9fb;
+  color: #003b7a;
+}
+
+.event-tabs .nav-link.active {
+  background: linear-gradient(135deg, #0057b8, #007bff);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 87, 184, 0.25);
+}
+/* Event dashboard panel */
+
+.stats-panel {
+  background: #f7f9fc;
+  border: 1px solid #e5e9f2;
+  border-radius: 18px;
+  padding: 24px;
+  margin-bottom: 2rem;
+}
+
+.stats-panel .card {
+  border: 0;
+  border-radius: 14px;
+  transition: transform .15s ease;
+}
+
+.stats-panel .card:hover {
+  transform: translateY(-2px);
+}
 
   .vite {
     z-index: 0;

@@ -82,7 +82,7 @@ export default function ManageEventPage() {
         </div>
       </div>
 
-      <ul className="nav nav-tabs mb-4">
+      <ul className="nav nav-tabs event-tabs">
   <li className="nav-item">
     <button
       className={`nav-link ${activeTab === "participants" ? "active" : ""}`}
