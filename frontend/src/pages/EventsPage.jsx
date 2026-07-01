@@ -134,7 +134,7 @@ export default function EventsPage() {
         </div>
       </div>
 
-    <h2 className="admin-section-title mb-3">Existing Events</h2>
+    <h2 className="admin-section-title mb-3">Manage Existing Events</h2>
 
       {events.length === 0 ? (
         <div className="alert alert-secondary">
