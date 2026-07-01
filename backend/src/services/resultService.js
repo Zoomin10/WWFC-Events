@@ -18,14 +18,23 @@ export async function getResultsByEvent(eventId) {
 }
 
 export async function createResult(eventId, data) {
-  const participant = await prisma.participant.findUnique({
-    where: {
-      eventId_entryNumber: {
+  let participant;
+
+  if (data.participantId) {
+    participant = await prisma.participant.findFirst({
+      where: {
+        id: data.participantId,
+        eventId,
+      },
+    });
+  } else {
+    participant = await prisma.participant.findFirst({
+      where: {
         eventId,
         entryNumber: Number(data.entryNumber),
       },
-    },
-  });
+    });
+  }
 
   if (!participant) {
     throw new Error("Participant not found");
@@ -33,12 +42,10 @@ export async function createResult(eventId, data) {
 
   return prisma.result.create({
     data: {
+      eventId,
       participantId: participant.id,
       challengeId: data.challengeId,
       score: Number(data.score),
-      adjustedScore: data.adjustedScore
-        ? Number(data.adjustedScore)
-        : null,
     },
     include: {
       participant: true,

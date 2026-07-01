@@ -6,7 +6,7 @@ import {
   updateResult,
   deleteResult,
 } from "../api/results";
-
+import { getParticipants } from "../api/participants";
 export default function ResultsTab({ eventId }) {
   const [challenges, setChallenges] = useState([]);
   const [results, setResults] = useState([]);
@@ -14,6 +14,9 @@ const [editingResult, setEditingResult] = useState(null);
   const [challengeId, setChallengeId] = useState("");
   const [entryNumber, setEntryNumber] = useState("");
   const [score, setScore] = useState("");
+  const [participants, setParticipants] = useState([]);
+const [participantSearch, setParticipantSearch] = useState("");
+const [selectedParticipant, setSelectedParticipant] = useState(null);
 
   useEffect(() => {
     loadData();
@@ -22,14 +25,27 @@ const [editingResult, setEditingResult] = useState(null);
   async function loadData() {
     const challengeData = await getChallenges(eventId);
     const resultData = await getResults(eventId);
-
+    const participantData = await getParticipants(eventId);
     setChallenges(challengeData);
     setResults(resultData);
+    setParticipants(participantData);
 
     if (challengeData.length > 0 && !challengeId) {
       setChallengeId(challengeData[0].id);
     }
   }
+  const filteredParticipants = participants
+  .filter((participant) =>
+    participant.surname
+      .toLowerCase()
+      .includes(participantSearch.toLowerCase())
+  )
+  .sort((a, b) => {
+    const surnameCompare = a.surname.localeCompare(b.surname);
+    if (surnameCompare !== 0) return surnameCompare;
+    return a.firstName.localeCompare(b.firstName);
+  });
+
 async function handleUpdateResult(e) {
   e.preventDefault();
 
@@ -54,18 +70,19 @@ await loadData();
   async function handleCreateResult(e) {
     e.preventDefault();
 
-    if (!challengeId || !entryNumber || !score) {
-      alert("Please select a challenge, enter an entry number and score.");
-      return;
-    }
+if (!challengeId || !selectedParticipant || !score) {
+  alert("Please select a challenge, participant and score.");
+  return;
+}
 
-    await createResult(eventId, {
-      challengeId,
-      entryNumber,
-      score,
-    });
+await createResult(eventId, {
+  challengeId,
+  participantId: selectedParticipant.id,
+  score,
+});
 
-    setEntryNumber("");
+setParticipantSearch("");
+setSelectedParticipant(null);
     setScore("");
 
     await loadData();
@@ -96,21 +113,50 @@ await loadData();
         </div>
 
         <div className="col-md-3">
-          <input
-            className="form-control"
-            placeholder="Entry number"
-            value={entryNumber}
-            onChange={(e) => setEntryNumber(e.target.value)}
-          />
-        </div>
+         <div className="position-relative">
+  <input
+    className="form-control"
+    placeholder="Search participant..."
+    value={participantSearch}
+    onChange={(e) => {
+      setParticipantSearch(e.target.value);
+      setSelectedParticipant(null);
+    }}
+  />
 
-        <div className="col-md-3">
-          <input
-            className="form-control"
-            placeholder="Score"
-            value={score}
-            onChange={(e) => setScore(e.target.value)}
-          />
+  {participantSearch && !selectedParticipant && (
+    <div
+      className="list-group position-absolute w-100"
+      style={{
+        zIndex: 1000,
+        maxHeight: "220px",
+        overflowY: "auto",
+      }}
+    >
+      {filteredParticipants.map((participant) => (
+        <button
+          key={participant.id}
+          type="button"
+          className="list-group-item list-group-item-action"
+          onClick={() => {
+            setSelectedParticipant(participant);
+            setParticipantSearch(
+              `${participant.entryNumber.toString().padStart(3, "0")} - ${participant.firstName} ${participant.surname}`
+            );
+          }}
+        >
+          <strong>
+            {participant.entryNumber.toString().padStart(3, "0")}
+          </strong>{" "}
+          {participant.firstName} {participant.surname}
+          <div className="small text-muted">
+            {participant.schoolYear}
+          </div>
+        </button>
+      ))}
+    </div>
+  )}
+</div>
         </div>
 
         <div className="col-md-2">
