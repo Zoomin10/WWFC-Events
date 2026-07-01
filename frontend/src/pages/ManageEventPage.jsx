@@ -27,9 +27,7 @@ export default function ManageEventPage() {
 
 return (
   <div>
-    <Link to="/events" className="btn btn-outline-secondary btn-sm mb-4">
-      ← Back to Events
-    </Link>
+    
 
     <div className="d-flex justify-content-between align-items-start mb-4">
       <div>

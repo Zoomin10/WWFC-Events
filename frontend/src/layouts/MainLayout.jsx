@@ -11,25 +11,33 @@ export default function MainLayout() {
 
   return (
     <>
-      <nav className="navbar navbar-dark bg-primary shadow-sm">
-        <div className="container d-flex justify-content-between align-items-center">
-          <Link className="navbar-brand fw-bold" to="/events">
-            WWFC Event Manager
-          </Link>
+     <nav className="navbar navbar-dark bg-primary shadow-sm">
+  <div className="container d-flex justify-content-between align-items-center">
 
-          <button
-            className="btn btn-outline-light btn-sm"
-            type="button"
-            onClick={handleLogout}
-          >
-            Logout
-          </button>
-        </div>
-      </nav>
+    <div className="d-flex align-items-center gap-3">
 
-      <main className="container py-4">
-        <Outlet />
-      </main>
+      <Link
+        to="/events"
+        className="btn btn-outline-light btn-sm"
+      >
+        ← Events
+      </Link>
+
+      <span className="navbar-brand mb-0 h1 fw-bold">
+        WWFC Event Manager
+      </span>
+
+    </div>
+
+    <button
+      className="btn btn-outline-light btn-sm"
+      onClick={handleLogout}
+    >
+      Logout
+    </button>
+
+  </div>
+</nav>
     </>
   );
 }
