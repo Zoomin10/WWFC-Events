@@ -34,12 +34,22 @@ const [selectedParticipant, setSelectedParticipant] = useState(null);
       setChallengeId(challengeData[0].id);
     }
   }
-  const filteredParticipants = participants
-  .filter((participant) =>
-    participant.surname
+const search = participantSearch.trim().toLowerCase();
+
+const filteredParticipants = participants
+  .filter((participant) => {
+    if (!search) return false;
+
+    const surnameMatch = participant.surname
       .toLowerCase()
-      .includes(participantSearch.toLowerCase())
-  )
+      .startsWith(search);
+
+    const entryMatch = participant.entryNumber
+      .toString()
+      .startsWith(search);
+
+    return surnameMatch || entryMatch;
+  })
   .sort((a, b) => {
     const surnameCompare = a.surname.localeCompare(b.surname);
     if (surnameCompare !== 0) return surnameCompare;
