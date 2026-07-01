@@ -116,7 +116,7 @@ return (
               <h2 className="display-5 fw-bold text-primary">
                 {event.challenges?.length ?? 0}
               </h2>
-              <p className="text-muted mb-0">Challenges</p>
+              <p className="text-muted mb-0">Number of Challenges</p>
             </div>
           </div>
         </div>
@@ -131,7 +131,7 @@ return (
                   0
                 ) ?? 0}
               </h2>
-              <p className="text-muted mb-0">Results</p>
+              <p className="text-muted mb-0">Results Submitted</p>
             </div>
           </div>
         </div>
