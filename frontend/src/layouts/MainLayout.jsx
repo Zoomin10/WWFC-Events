@@ -19,7 +19,7 @@ return (
 
         {/* Club title */}
         <div className="text-center text-md-start mb-2 mb-md-3">
-          <span className="navbar-brand mb-0 fw-bold fs-4">
+          <span className="navbar-brand mb-0 fs-4">
             WWFC Event Manager
           </span>
         </div>
