@@ -82,7 +82,7 @@ return (
           className={`nav-link ${activeTab === "leaderboard" ? "active" : ""}`}
           onClick={() => setActiveTab("leaderboard")}
         >
-          <i className="bi bi-award-fill me-2"></i>
+         
           Leaderboard
         </button>
       </li>
