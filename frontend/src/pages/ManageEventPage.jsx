@@ -88,14 +88,14 @@ return (
       </li>
     </ul>
 
-    <div className="stats-panel mb-4">
+    <div className="stats-panel mb-3">
       <div className="row g-3">
         <div className="col-md-4">
-          <div className="card stat-card text-center shadow-sm h-100">
-            <div className="card-body">
+         <div className="card stat-card text-center shadow-sm">
+            <div className="card-body py-2">
               <i className="bi bi-people-fill text-primary fs-3"></i>
 
-              <h3 className="fw-bold text-primary my-1">
+              <h3 className="fw-bold text-primary my-0">
                 {event.participants?.length ?? 0}
               </h3>
 
@@ -105,11 +105,11 @@ return (
         </div>
 
         <div className="col-md-4">
-          <div className="card stat-card text-center shadow-sm h-100">
-            <div className="card-body">
+         <div className="card stat-card text-center shadow-sm">
+            <div className="card-body py-2">
               <i className="bi bi-trophy-fill text-primary fs-3"></i>
 
-            <h3 className="fw-bold text-primary my-1">
+            <h3 className="fw-bold text-primary my-0">
                 {event.challenges?.length ?? 0}
               </h3>
 
@@ -119,11 +119,11 @@ return (
         </div>
 
         <div className="col-md-4">
-          <div className="card stat-card text-center shadow-sm h-100">
-            <div className="card-body">
+          <div className="card stat-card text-center shadow-sm">
+            <div className="card-body py-2">
               <i className="bi bi-bar-chart-fill text-primary fs-3"></i>
 
-           <h3 className="fw-bold text-primary my-1">
+           <h3 className="fw-bold text-primary my-0">
                 {event.participants?.reduce(
                   (total, participant) =>
                     total + (participant.results?.length ?? 0),
