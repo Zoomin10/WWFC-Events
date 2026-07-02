@@ -95,9 +95,9 @@ return (
             <div className="card-body py-2">
               <i className="bi bi-people-fill text-primary fs-5"></i>
 
-              <h4 className="fw-bold text-primary my-0">
+              <h5 className="fw-bold text-primary my-0">
                 {event.participants?.length ?? 0}
-              </h4>
+              </h5>
 
               <p className="small text-muted mb-0">Participants</p>
             </div>
@@ -109,9 +109,9 @@ return (
             <div className="card-body py-2">
               <i className="bi bi-trophy-fill text-primary fs-5"></i>
 
-            <h4 className="fw-bold text-primary my-0">
+            <h5 className="fw-bold text-primary my-0">
                 {event.challenges?.length ?? 0}
-              </h4>
+              </h5>
 
               <p className="small text-muted mb-0">Challenges</p>
             </div>
@@ -123,13 +123,13 @@ return (
             <div className="card-body py-2">
               <i className="bi bi-bar-chart-fill text-primary fs-5"></i>
 
-           <h4 className="fw-bold text-primary my-0">
+           <h5 className="fw-bold text-primary my-0">
                 {event.participants?.reduce(
                   (total, participant) =>
                     total + (participant.results?.length ?? 0),
                   0
                 ) ?? 0}
-              </h4>
+              </h5>
 
               <p className="small text-muted mb-0">Results Submitted</p>
             </div>
