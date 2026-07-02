@@ -27,8 +27,6 @@ export default function ManageEventPage() {
 
 return (
   <div>
-    
-
     <div className="d-flex justify-content-between align-items-start mb-4">
       <div>
         <h1 className="page-title mb-2">{event.name}</h1>
@@ -39,58 +37,52 @@ return (
         </p>
       </div>
 
-      {event.isActive ? (
-        <span className="badge bg-success fs-6 px-3 py-2">
-          Active
-        </span>
-      ) : (
-        <span className="badge bg-secondary fs-6 px-3 py-2">
-          Inactive
-        </span>
-      )}
+      <span
+        className={`badge fs-6 px-3 py-2 ${
+          event.isActive ? "bg-success" : "bg-secondary"
+        }`}
+      >
+        {event.isActive ? "Active" : "Inactive"}
+      </span>
     </div>
 
     <ul className="nav nav-tabs event-tabs mb-4">
       <li className="nav-item">
         <button
-          className={`nav-link ${
-            activeTab === "participants" ? "active" : ""
-          }`}
+          className={`nav-link ${activeTab === "participants" ? "active" : ""}`}
           onClick={() => setActiveTab("participants")}
         >
+          <i className="bi bi-people-fill me-2"></i>
           Participants
         </button>
       </li>
 
       <li className="nav-item">
         <button
-          className={`nav-link ${
-            activeTab === "challenges" ? "active" : ""
-          }`}
+          className={`nav-link ${activeTab === "challenges" ? "active" : ""}`}
           onClick={() => setActiveTab("challenges")}
         >
+          <i className="bi bi-trophy-fill me-2"></i>
           Challenges
         </button>
       </li>
 
       <li className="nav-item">
         <button
-          className={`nav-link ${
-            activeTab === "results" ? "active" : ""
-          }`}
+          className={`nav-link ${activeTab === "results" ? "active" : ""}`}
           onClick={() => setActiveTab("results")}
         >
+          <i className="bi bi-bar-chart-fill me-2"></i>
           Results
         </button>
       </li>
 
       <li className="nav-item">
         <button
-          className={`nav-link ${
-            activeTab === "leaderboard" ? "active" : ""
-          }`}
+          className={`nav-link ${activeTab === "leaderboard" ? "active" : ""}`}
           onClick={() => setActiveTab("leaderboard")}
         >
+          <i className="bi bi-award-fill me-2"></i>
           Leaderboard
         </button>
       </li>
@@ -98,11 +90,11 @@ return (
 
     <div className="stats-panel mb-4">
       <div className="row g-4">
-
         <div className="col-md-4">
           <div className="card text-center shadow-sm h-100">
             <div className="card-body">
-              <h2 className="display-5 fw-bold text-primary">
+              <i className="bi bi-people-fill text-primary fs-1"></i>
+              <h2 className="display-5 fw-bold text-primary mt-2">
                 {event.participants?.length ?? 0}
               </h2>
               <p className="text-muted mb-0">Participants</p>
@@ -113,10 +105,11 @@ return (
         <div className="col-md-4">
           <div className="card text-center shadow-sm h-100">
             <div className="card-body">
-              <h2 className="display-5 fw-bold text-primary">
+              <i className="bi bi-trophy-fill text-warning fs-1"></i>
+              <h2 className="display-5 fw-bold text-primary mt-2">
                 {event.challenges?.length ?? 0}
               </h2>
-              <p className="text-muted mb-0">Number of Challenges</p>
+              <p className="text-muted mb-0">Challenges</p>
             </div>
           </div>
         </div>
@@ -124,7 +117,8 @@ return (
         <div className="col-md-4">
           <div className="card text-center shadow-sm h-100">
             <div className="card-body">
-              <h2 className="display-5 fw-bold text-primary">
+              <i className="bi bi-bar-chart-fill text-success fs-1"></i>
+              <h2 className="display-5 fw-bold text-primary mt-2">
                 {event.participants?.reduce(
                   (total, participant) =>
                     total + (participant.results?.length ?? 0),
@@ -135,32 +129,20 @@ return (
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
     <div className="card shadow-sm">
       <div className="card-body">
-
         {activeTab === "participants" && (
-          <ParticipantsTab
-            eventId={id}
-            onParticipantsChanged={loadEvent}
-          />
+          <ParticipantsTab eventId={id} onParticipantsChanged={loadEvent} />
         )}
 
-        {activeTab === "challenges" && (
-          <ChallengesTab eventId={id} />
-        )}
+        {activeTab === "challenges" && <ChallengesTab eventId={id} />}
 
-        {activeTab === "results" && (
-          <ResultsTab eventId={id} />
-        )}
+        {activeTab === "results" && <ResultsTab eventId={id} />}
 
-        {activeTab === "leaderboard" && (
-          <LeaderboardTab eventId={id} />
-        )}
-
+        {activeTab === "leaderboard" && <LeaderboardTab eventId={id} />}
       </div>
     </div>
   </div>

@@ -127,6 +127,17 @@ body {
   border-radius: 14px;
   transition: transform .15s ease;
 }
+.navbar-brand {
+  font-family: "Poppins", sans-serif;
+  letter-spacing: -0.02em;
+}
+.navbar {
+  background: linear-gradient(135deg, #004a99, #0057b8) !important;
+}
+
+.navbar .btn {
+  min-width: 95px;
+}
 
 .stats-panel .card:hover {
   transform: translateY(-2px);
