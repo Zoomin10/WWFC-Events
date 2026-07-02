@@ -31,7 +31,7 @@ return (
       <div>
         <h1 className="page-title mb-2">{event.name}</h1>
 
-        <p className="small text-muted mb-0">
+        <p className="text-muted mb-0" style={{ fontSize: "0.9rem" }}>
           📍 {event.location || "No location"} &nbsp; • &nbsp;
           📅 {new Date(event.eventDate).toLocaleDateString("en-GB")}
         </p>
@@ -52,7 +52,7 @@ return (
           className={`nav-link ${activeTab === "participants" ? "active" : ""}`}
           onClick={() => setActiveTab("participants")}
         >
-          <i className="bi bi-people-fill me-2"></i>
+       <i className="bi bi-people-fill text-primary fs-4"></i>
           Participants
         </button>
       </li>
@@ -62,7 +62,7 @@ return (
           className={`nav-link ${activeTab === "challenges" ? "active" : ""}`}
           onClick={() => setActiveTab("challenges")}
         >
-          <i className="bi bi-trophy-fill me-2"></i>
+          <i className="bi bi-trophy-fill text-primary fs-4"></i>
           Challenges
         </button>
       </li>
@@ -72,7 +72,7 @@ return (
           className={`nav-link ${activeTab === "results" ? "active" : ""}`}
           onClick={() => setActiveTab("results")}
         >
-          <i className="bi bi-bar-chart-fill me-2"></i>
+          <i className="bi bi-bar-chart-fill text-primary fs-4"></i>
           Results
         </button>
       </li>
@@ -95,7 +95,7 @@ return (
             <div className="card-body">
               <i className="bi bi-people-fill text-primary fs-3"></i>
 
-              <h3 className="fw-bold text-primary mb-1 mt-2">
+              <h3 className="fw-bold text-primary my-1">
                 {event.participants?.length ?? 0}
               </h3>
 
@@ -109,7 +109,7 @@ return (
             <div className="card-body">
               <i className="bi bi-trophy-fill text-primary fs-3"></i>
 
-              <h3 className="fw-bold text-primary mb-1 mt-2">
+            <h3 className="fw-bold text-primary my-1">
                 {event.challenges?.length ?? 0}
               </h3>
 
@@ -123,7 +123,7 @@ return (
             <div className="card-body">
               <i className="bi bi-bar-chart-fill text-primary fs-3"></i>
 
-              <h3 className="fw-bold text-primary mb-1 mt-2">
+           <h3 className="fw-bold text-primary my-1">
                 {event.participants?.reduce(
                   (total, participant) =>
                     total + (participant.results?.length ?? 0),

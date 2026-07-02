@@ -144,7 +144,7 @@ body {
 }
 
 .stat-card .card-body {
-  padding: 1rem;
+  padding: 0.9rem 1rem;
 }
 
 .stats-panel .card:hover {
