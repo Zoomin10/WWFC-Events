@@ -52,7 +52,7 @@ return (
           className={`nav-link ${activeTab === "participants" ? "active" : ""}`}
           onClick={() => setActiveTab("participants")}
         >
-       <i className="bi bi-people-fill text-primary fs-4"></i>
+   
           Participants
         </button>
       </li>
@@ -62,7 +62,7 @@ return (
           className={`nav-link ${activeTab === "challenges" ? "active" : ""}`}
           onClick={() => setActiveTab("challenges")}
         >
-          <i className="bi bi-trophy-fill text-primary fs-4"></i>
+       
           Challenges
         </button>
       </li>
@@ -72,7 +72,7 @@ return (
           className={`nav-link ${activeTab === "results" ? "active" : ""}`}
           onClick={() => setActiveTab("results")}
         >
-          <i className="bi bi-bar-chart-fill text-primary fs-4"></i>
+     
           Results
         </button>
       </li>
