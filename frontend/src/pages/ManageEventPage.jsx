@@ -31,7 +31,7 @@ return (
       <div>
         <h1 className="page-title mb-2">{event.name}</h1>
 
-        <p className="text-muted mb-0">
+        <p className="text-small mb-0">
           📍 {event.location || "No location"} &nbsp; • &nbsp;
           📅 {new Date(event.eventDate).toLocaleDateString("en-GB")}
         </p>
@@ -52,7 +52,7 @@ return (
           className={`nav-link ${activeTab === "participants" ? "active" : ""}`}
           onClick={() => setActiveTab("participants")}
         >
-          <i className="bi bi-people-fill me-2"></i>
+          <i className="bi bi-people-fill text-primary fs-3"></i>
           Participants
         </button>
       </li>
@@ -62,7 +62,7 @@ return (
           className={`nav-link ${activeTab === "challenges" ? "active" : ""}`}
           onClick={() => setActiveTab("challenges")}
         >
-          <i className="bi bi-trophy-fill me-2"></i>
+          <i className="bi bi-trophy-filltext-primary fs-3"></i>
           Challenges
         </button>
       </li>
@@ -72,7 +72,7 @@ return (
           className={`nav-link ${activeTab === "results" ? "active" : ""}`}
           onClick={() => setActiveTab("results")}
         >
-          <i className="bi bi-bar-chart-fill me-2"></i>
+          <i className="bi bi-bar-chart-fill text-primary fs-3"></i>
           Results
         </button>
       </li>
@@ -82,22 +82,22 @@ return (
           className={`nav-link ${activeTab === "leaderboard" ? "active" : ""}`}
           onClick={() => setActiveTab("leaderboard")}
         >
-          <i className="bi bi-award-fill me-2"></i>
+          <i className="bi bi-award-fill text-primary fs-3"></i>
           Leaderboard
         </button>
       </li>
     </ul>
 
     <div className="stats-panel mb-4">
-      <div className="row g-4">
+      <div className="row g-3">
         <div className="col-md-4">
-          <div className="card text-center shadow-sm h-100">
+          <div className="card stat-card text-center shadow-sm h-100">
             <div className="card-body">
               <i className="bi bi-people-fill text-primary fs-1"></i>
-              <h2 className="display-5 fw-bold text-primary mt-2">
+             <h3 className="fw-bold text-primary mb-1 mt-2">
                 {event.participants?.length ?? 0}
-              </h2>
-              <p className="text-muted mb-0">Participants</p>
+              </h3>
+              <p className="text-small mb-0">Participants</p>
             </div>
           </div>
         </div>
@@ -109,7 +109,7 @@ return (
               <h2 className="display-5 fw-bold text-primary mt-2">
                 {event.challenges?.length ?? 0}
               </h2>
-              <p className="text-muted mb-0">Challenges</p>
+              <p className="text-small mb-0">Challenges</p>
             </div>
           </div>
         </div>
@@ -125,7 +125,7 @@ return (
                   0
                 ) ?? 0}
               </h2>
-              <p className="text-muted mb-0">Results Submitted</p>
+              <p className="text-small mb-0">Results Submitted</p>
             </div>
           </div>
         </div>

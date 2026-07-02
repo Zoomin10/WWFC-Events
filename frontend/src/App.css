@@ -138,6 +138,14 @@ body {
 .navbar .btn {
   min-width: 95px;
 }
+.stat-card {
+  border: 0;
+  border-radius: 14px;
+}
+
+.stat-card .card-body {
+  padding: 1rem;
+}
 
 .stats-panel .card:hover {
   transform: translateY(-2px);
