@@ -31,10 +31,7 @@ return (
       <div>
         <h1 className="page-title mb-2">{event.name}</h1>
 
-        <p className="text-muted mb-0" style={{ fontSize: "0.9rem" }}>
-          📍 {event.location || "No location"} &nbsp; • &nbsp;
-          📅 {new Date(event.eventDate).toLocaleDateString("en-GB")}
-        </p>
+      
       </div>
 
       <span
