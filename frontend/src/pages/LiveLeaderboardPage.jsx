@@ -78,17 +78,7 @@ return (
   className="d-flex flex-wrap justify-content-center align-items-center gap-4 mt-3 mb-3"
 >
 
-  <div className="text-muted">
-    📅 {new Date(event.eventDate).toLocaleDateString("en-GB")}
-  </div>
 
-  <div className="text-muted">
-    📍 {event.location || "Location TBC"}
-  </div>
-
-  <span className="badge bg-success fs-6 px-3 py-2">
-    ● LIVE
-  </span>
 
 </div>
       </div>
